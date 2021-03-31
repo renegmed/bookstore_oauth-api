@@ -1,0 +1,16 @@
+Status: wip 
+
+Cassandra
+
+CREATE KEYSPACE oauth WITH REPLICATION = {'class':'SipleStrategy', 'replication_factor': 1}
+
+
+cqlsh> describe keyspaces;
+
+cqlsh>USE oauth;
+
+cqlsh:oauth> describe tables;
+
+cqlsh:oauth> CREATE TABLE access_tokens( access_token varchar PRIMARY_KEY, user_id biting, client_id bigint, expires bigint);
+
+cqlsh:oauth> select * from access_tokens where access_token='sdfj';

@@ -1,0 +1,14 @@
+version: '3'
+services: 
+  cassandra:
+    container_name: cassandra 
+    build: ./cassandra
+    ports: 
+      - '9042:9042'
+    volumes:
+      - ./cassandra-data:/var/lib/cassandra
+    # environment:
+    #   - CASSANDRA_SEEDS=cassandra
+    #   - CASSANDRA_PASSWORD_SEEDER=yes
+    #   - CASSANDRA_PASSWORD=cassandra
+ 
