@@ -1,8 +1,9 @@
 version: '3'
-services: 
+services:  
   cassandra:
     container_name: cassandra 
     build: ./cassandra
+    image: renegmed/cassandra
     ports: 
       - '9042:9042'
     volumes:

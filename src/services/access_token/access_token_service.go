@@ -4,6 +4,7 @@ import (
 	"bookstore_oauth-api/src/domain/access_token"
 	"bookstore_oauth-api/src/repository/db"
 	"bookstore_oauth-api/src/repository/rest"
+	"log"
 	"strings"
 
 	"github.com/renegmed/bookstore_utils-go/rest_errors"
@@ -46,6 +47,8 @@ func (s *service) Create(request access_token.AccessTokenRequest) (*access_token
 
 	//TODO: Support both grant types: client_credentials and password
 
+	log.Println("... access_token_service - Authenticate the user against the Users API request:\n", request)
+
 	// Authenticate the user against the Users API:
 	user, err := s.restUsersRepo.LoginUser(request.Username, request.Password)
 	if err != nil {
@@ -55,6 +58,8 @@ func (s *service) Create(request access_token.AccessTokenRequest) (*access_token
 	// Generate a new access token:
 	at := access_token.GetNewAccessToken(user.Id)
 	at.Generate()
+
+	log.Println("... save access token to cassandra:", at)
 
 	// Save the new access token in Cassandra:
 	if err := s.dbRepo.Create(at); err != nil {
