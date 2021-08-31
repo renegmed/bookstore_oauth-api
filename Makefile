@@ -1,6 +1,11 @@
 init-project:
 	go mod init bookstore_oauth-api
+up:
+	docker-compose up -d 
 
+down:
+	docker-compose down 
+	
 test:
 	go test -race ./... -v -cover
 
